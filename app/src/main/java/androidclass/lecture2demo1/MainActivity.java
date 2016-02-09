@@ -1,5 +1,6 @@
 package androidclass.lecture2demo1;
 
+import android.app.ListActivity;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,46 +12,29 @@ import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends ListActivity {
     String[] classes;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
 
         classes=getResources().getStringArray(R.array.myListofClasses);
-        setListAdapter(new ArrayAdapter<String>(this,R.layout.mynewlayout,classes))
-
-        //String myConst= getResources().getString(R.string.myNewString);
-        //TextView mView=(TextView) findViewById(R.id.myView);
-        //mView.setText(myConst);
-    }
+        setListAdapter(new ArrayAdapter<String>(this,R.layout.mynewlayout,classes));
 
 
-
-    /*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    protected void onListItemClick(ListView l, View v, int position, long id) {
+        super.onListItemClick(l, v, position, id);
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+        Intent myIntnt=new Intent(this, ReadMSG.class);
+        myIntnt.putExtra("myKeyMSG", "Hello My MSG");
+        startActivity(myIntnt);
 
-        return super.onOptionsItemSelected(item);
     }
-    */
+
+
+
 }
